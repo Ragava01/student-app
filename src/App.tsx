@@ -19,7 +19,7 @@ function App() {
       <div>
         <nav className="vertical-navbar">
           <ul>
-            <ol>Student</ol>
+            <ol>Students</ol>
             <ol>Mark list</ol>
             <ol>Rank</ol>
           </ul>
