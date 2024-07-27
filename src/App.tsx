@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import Nav from "./Components/Navbar";
 import Studentinfo from "./Components/Studentinfo";
-import Student from "./Components/Student";
 import Mark from "./Components/Marklist";
 import Rank from "./Components/Rank";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
