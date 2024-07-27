@@ -1,5 +1,11 @@
 import React from "react";
 import "./App.css";
+import Nav from "./Components/Navbar";
+import Studentinfo from "./Components/Studentinfo";
+import Student from "./Components/Student";
+import Mark from "./Components/Marklist";
+import Rank from "./Components/Rank";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -7,24 +13,14 @@ function App() {
       <header className="App">
         <h1>Student</h1>
       </header>
-      <body>
-        <div className="in">
-          <label>Student name:</label>
-          <input type="text" required />
-          <label>STD:</label>
-          <input type="number" required />
-          <button className="btn">Submit</button>
-        </div>
-      </body>
-      <div>
-        <nav className="vertical-navbar">
-          <ul>
-            <ol>Students</ol>
-            <ol>Mark list</ol>
-            <ol>Rank</ol>
-          </ul>
-        </nav>
-      </div>
+      <Nav />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Studentinfo />} />
+          <Route path="/Mark" element={<Mark />} />
+          <Route path="/Rank" element={<Rank />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
