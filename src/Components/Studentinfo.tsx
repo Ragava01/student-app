@@ -6,28 +6,23 @@ type StudentType = {
 };
 
 export default function Student() {
-  const [students, setStudents] = useState<StudentType[]>([]);
+  const [students, setStudents] = useState<StudentType[]>(() => {
+    const savedStudents = localStorage.getItem("students");
+    return savedStudents ? JSON.parse(savedStudents) : [];
+  });
   const [name, setName] = useState<string>("");
-  const [register, setregister] = useState<string>("");
+  const [register, setRegister] = useState<string>("");
 
   useEffect(() => {
-    handleLoadStudents();
-  }, []);
+    localStorage.setItem("students", JSON.stringify(students));
+  }, [students]);
 
   const handleAddStudent = () => {
     const newStudent: StudentType = { name, register };
     const updatedStudents = [...students, newStudent];
     setStudents(updatedStudents);
-    localStorage.setItem("students", JSON.stringify(updatedStudents));
     setName("");
-    setregister("");
-  };
-
-  const handleLoadStudents = () => {
-    const storedStudents = localStorage.getItem("students");
-    if (storedStudents) {
-      setStudents(JSON.parse(storedStudents));
-    }
+    setRegister("");
   };
 
   return (
@@ -43,22 +38,21 @@ export default function Student() {
       <br />
       <label>Register-No:</label>
       <input
-        type="number"
+        type="text"
         placeholder="Register-No"
         value={register}
-        onChange={(e) => setregister(e.target.value)}
+        onChange={(e) => setRegister(e.target.value)}
       />
       <br />
-      <button  onClick={handleAddStudent}>Sumbit</button>
+      <button onClick={handleAddStudent}>Submit</button>
 
       {/* <ul>
         {students.map((student, index) => (
-          <ol key={index}>
+          <li key={index}>
             <label>Student-Name: {student.name}</label>
             <label>Register-No: {student.register}</label>
-            <label>Mark: {student.mark}</label>
             <br />
-          </ol>
+          </li>
         ))}
       </ul> */}
     </div>

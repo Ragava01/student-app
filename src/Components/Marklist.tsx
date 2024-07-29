@@ -1,43 +1,68 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { useStudents } from "./StudentsContext";
 
 interface Student {
   name: string;
+  RegisterNo: string;
   English: string;
   Science: string;
-  Math:string
+  Math: string;
   mark: string;
 }
 
 const StudentTable: React.FC = () => {
-  const [students, setStudents] = useState<Student[]>([]);
-  const [student, setStudent] = useState<Student>({ name: '', mark: '', English: '', Science: '', Math: '' });
+  const { students, setStudents } = useStudents();
+  const [student, setStudent] = useState<Student>({
+    name: "",
+    RegisterNo: "",
+    mark: "",
+    English: "",
+    Science: "",
+    Math: "",
+  });
+
+  useEffect(() => {
+    localStorage.setItem("studentsTable", JSON.stringify(students));
+  }, [students]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setStudent((prevStudent) => ({
       ...prevStudent,
-      [name]: name === 'mark' ? Number(value) : value,
+      [name]: value,
     }));
+  };
+
+  const calculateTotal = (student: Student) => {
+    const total =
+      Number(student.English) + Number(student.Science) + Number(student.Math);
+    return total.toString();
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (student.name && student.mark) {
-      setStudents((prevStudents) => [...prevStudents, student]);
-      setStudent({ name: '', mark: '', English: '', Science: '', Math: '' });
+    if (student.name && student.RegisterNo) {
+      const totalMark = calculateTotal(student);
+      setStudents((prevStudents) => [
+        ...prevStudents,
+        { ...student, mark: totalMark },
+      ]);
+      setStudent({
+        name: "",
+        RegisterNo: "",
+        mark: "",
+        English: "",
+        Science: "",
+        Math: "",
+      });
     }
   };
 
-  function Total(){
-    const sum=0;
-  }
-  
   return (
-    <div className="in">
+    <div className="container">
       <h1>Student Marks Table</h1>
       <form onSubmit={handleSubmit} className="student-form">
-      <label>Student-Name:</label>
+        <label>Student-Name:</label>
         <input
           type="text"
           name="name"
@@ -46,13 +71,13 @@ const StudentTable: React.FC = () => {
           placeholder="Enter student name"
           className="input"
         />
-        <label>Mark:</label>
+        <label>RegisterNo:</label>
         <input
-          type="number"
-          name="mark"
-          value={student.mark}
+          type="text"
+          name="RegisterNo"
+          value={student.RegisterNo}
           onChange={handleChange}
-          placeholder="Enter student mark"
+          placeholder="Enter RegisterNo"
           className="input"
         />
         <label>English:</label>
@@ -82,27 +107,31 @@ const StudentTable: React.FC = () => {
           placeholder="Enter Math mark"
           className="input"
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="button">
+          Submit
+        </button>
       </form>
 
-      <table className="student-table">
+      <table className="student-table ">
         <thead>
           <tr>
             <th>Name</th>
-            <th>Mark</th>
+            <th>Register-No</th>
             <th>English</th>
             <th>Science</th>
             <th>Math</th>
+            <th>Total-mark</th>
           </tr>
         </thead>
         <tbody>
           {students.map((student, index) => (
             <tr key={index}>
               <td>{student.name}</td>
-              <td>{student.mark}</td>
+              <td>{student.RegisterNo}</td>
               <td>{student.English}</td>
               <td>{student.Science}</td>
               <td>{student.Math}</td>
+              <td>{student.mark}</td>
             </tr>
           ))}
         </tbody>

@@ -119,7 +119,7 @@ button {
   border-radius: 50px;
   cursor: pointer;
   border: 0;
-  background-color:  #222;
+  background-color: #222;
   box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -143,7 +143,6 @@ button:active {
   transition: 100ms;
 }
 
-
 .student-form {
   display: flex;
   flex-direction: column;
@@ -161,12 +160,88 @@ button:active {
   border-collapse: collapse;
 }
 
-.student-table th, .student-table td {
+.student-table th,
+.student-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
 .student-table th {
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-table th,
+.student-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.student-table th {
+  background-color: #f2f2f2;
+}
+
+.rank-container {
+  margin-top: 20px;
+  margin-left: 5level0px;
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rank-table th,
+.rank-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.rank-table th {
   background-color: #f2f2f2;
 }
