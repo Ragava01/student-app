@@ -1,8 +1,14 @@
-import React from "react";
-import { useStudents } from "./StudentsContext";
+import React, { useEffect, useState } from "react";
 
 const Rank: React.FC = () => {
-  const { students } = useStudents();
+  const [students, setStudents] = useState(() => {
+    const savedStudents = localStorage.getItem("studentsTable");
+    return savedStudents ? JSON.parse(savedStudents) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("studentsTable", JSON.stringify(students));
+  }, [students]);
   const sortedStudents = [...students].sort(
     (a, b) => Number(b.mark) - Number(a.mark)
   );

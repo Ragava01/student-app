@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 
+
 type StudentType = {
   name: string;
   register: string;
 };
 
 export default function Student() {
+
   const [students, setStudents] = useState<StudentType[]>(() => {
     const savedStudents = localStorage.getItem("students");
     return savedStudents ? JSON.parse(savedStudents) : [];
   });
   const [name, setName] = useState<string>("");
   const [register, setRegister] = useState<string>("");
+ 
 
   useEffect(() => {
     localStorage.setItem("students", JSON.stringify(students));
@@ -45,16 +48,6 @@ export default function Student() {
       />
       <br />
       <button onClick={handleAddStudent}>Submit</button>
-
-      {/* <ul>
-        {students.map((student, index) => (
-          <li key={index}>
-            <label>Student-Name: {student.name}</label>
-            <label>Register-No: {student.register}</label>
-            <br />
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 }

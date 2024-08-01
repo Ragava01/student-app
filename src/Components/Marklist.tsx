@@ -1,5 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import { useStudents } from "./StudentsContext";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
 interface Student {
   name: string;
@@ -11,7 +10,10 @@ interface Student {
 }
 
 const StudentTable: React.FC = () => {
-  const { students, setStudents } = useStudents();
+  const [students, setStudents] = useState<Student[]>(() => {
+    const savedStudents = localStorage.getItem("studentsTable");
+    return savedStudents ? JSON.parse(savedStudents) : [];
+  });
   const [student, setStudent] = useState<Student>({
     name: "",
     RegisterNo: "",
@@ -112,7 +114,7 @@ const StudentTable: React.FC = () => {
         </button>
       </form>
 
-      <table className="student-table ">
+      <table className="student-table">
         <thead>
           <tr>
             <th>Name</th>

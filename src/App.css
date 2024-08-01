@@ -227,11 +227,10 @@ h1 {
 
 .rank-container {
   margin-top: 20px;
-  margin-left: 5level0px;
 }
 
 .rank-table {
-  width: 100%;
+  margin-left: 500px;
   border-collapse: collapse;
 }
 
